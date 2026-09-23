@@ -1,11 +1,11 @@
-package Gestionparqueadero;
+package gestionparqueadero;
 
-public class espacio {
+public class Espacio {
     private int numero;
     private boolean estado; // false = Libre, true = Ocupado
 
     // Constructor
-    public espacio(int numero) {
+    public Espacio(int numero) {
         this.numero = numero;
         this.estado = false;
     }
@@ -19,20 +19,20 @@ public class espacio {
         this.estado = false;
     }
 
-    // Encapsulamiento (Getters y Setters)
-    public int getNumero() {
+    // Encapsulamiento en español (Obtener y Modificar)
+    public int obtenerNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void modificarNumero(int numero) {
         this.numero = numero;
     }
 
-    public boolean isEstado() {
+    public boolean obtenerEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void modificarEstado(boolean estado) {
         this.estado = estado;
     }
 }

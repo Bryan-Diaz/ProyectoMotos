@@ -1,19 +1,19 @@
-package gestion parqueadero;
+package gestionparqueadero;
 
-import Gestion motos.moto;
-import Gestion pagos.Pago;
+import gestionmotos.Moto;
+import gestionpagos.Pago;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Registro {
     private LocalDateTime fechaHoraIngreso;
     private LocalDateTime fechaHoraSalida;
-    private moto moto;
-    private espacio espacio;
+    private Moto moto;
+    private Espacio espacio;
     private Pago pago;
 
     // Constructor
-    public Registro(moto moto, espacio espacio) {
+    public Registro(Moto moto, Espacio espacio) {
         this.moto = moto;
         this.espacio = espacio;
         this.fechaHoraIngreso = LocalDateTime.now();
@@ -34,55 +34,55 @@ public class Registro {
     public void registrarIngreso() {
         if (this.espacio != null && this.moto != null) {
             this.espacio.ocupar();
-            System.out.println("Ingreso registrado: Moto " + this.moto.consultarPlaca() + " en Espacio #" + this.espacio.getNumero());
+            System.out.println("Ingreso registrado: Moto " + this.moto.consultarPlaca() + " en Espacio #" + this.espacio.obtenerNumero());
         }
     }
 
     public void registrarSalida() {
         if (this.espacio != null && this.moto != null) {
             this.espacio.liberar();
-            System.out.println("Salida registrada: Moto " + this.moto.consultarPlaca() + " del Espacio #" + this.espacio.getNumero());
+            System.out.println("Salida registrada: Moto " + this.moto.consultarPlaca() + " del Espacio #" + this.espacio.obtenerNumero());
         }
     }
 
-    // Encapsulamiento (Getters y Setters)
-    public LocalDateTime getFechaHoraIngreso() {
+    // Encapsulamiento en español (Obtener y Modificar)
+    public LocalDateTime obtenerFechaHoraIngreso() {
         return fechaHoraIngreso;
     }
 
-    public void setFechaHoraIngreso(LocalDateTime fechaHoraIngreso) {
+    public void modificarFechaHoraIngreso(LocalDateTime fechaHoraIngreso) {
         this.fechaHoraIngreso = fechaHoraIngreso;
     }
 
-    public LocalDateTime getFechaHoraSalida() {
+    public LocalDateTime obtenerFechaHoraSalida() {
         return fechaHoraSalida;
     }
 
-    public void setFechaHoraSalida(LocalDateTime fechaHoraSalida) {
+    public void modificarFechaHoraSalida(LocalDateTime fechaHoraSalida) {
         this.fechaHoraSalida = fechaHoraSalida;
     }
 
-    public moto getMoto() {
+    public Moto obtenerMoto() {
         return moto;
     }
 
-    public void setMoto(moto moto) {
+    public void modificarMoto(Moto moto) {
         this.moto = moto;
     }
 
-    public espacio getEspacio() {
+    public Espacio obtenerEspacio() {
         return espacio;
     }
 
-    public void setEspacio(espacio espacio) {
+    public void modificarEspacio(Espacio espacio) {
         this.espacio = espacio;
     }
 
-    public Pago getPago() {
+    public Pago obtenerPago() {
         return pago;
     }
 
-    public void setPago(Pago pago) {
+    public void modificarPago(Pago pago) {
         this.pago = pago;
     }
 }

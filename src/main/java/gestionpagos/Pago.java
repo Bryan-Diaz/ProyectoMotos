@@ -1,14 +1,14 @@
-package Gestionpagos;
+package gestionpagos;
 
 import java.time.LocalDateTime;
 
-public class pago {
+public class Pago {
     private double valor;
-    private Tipopago tipo;
+    private TipoPago tipo;
     private LocalDateTime fechaHora;
 
     // Constructor
-    public Pago(double valor, Tipopago tipo) {
+    public Pago(double valor, TipoPago tipo) {
         this.valor = valor;
         this.tipo = tipo;
         this.fechaHora = LocalDateTime.now();
@@ -23,28 +23,28 @@ public class pago {
         return this.valor > 0 && this.tipo != null;
     }
 
-    // Encapsulamiento (Getters y Setters)
-    public double getValor() {
+    // Encapsulamiento en español (Obtener y Modificar)
+    public double obtenerValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void modificarValor(double valor) {
         this.valor = valor;
     }
 
-    public Tipopago getTipo() {
+    public TipoPago obtenerTipo() {
         return tipo;
     }
 
-    public void setTipo(Tipopago tipo) {
+    public void modificarTipo(TipoPago tipo) {
         this.tipo = tipo;
     }
 
-    public LocalDateTime getFechaHora() {
+    public LocalDateTime obtenerFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(LocalDateTime fechaHora) {
+    public void modificarFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
     }
 }
