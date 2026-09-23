@@ -14,7 +14,6 @@ public class Pago {
         this.fechaHora = LocalDateTime.now();
     }
 
-    // Métodos del diagrama
     public void registrarPago() {
         System.out.println("Pago registrado por $" + this.valor + " mediante " + this.tipo);
     }
@@ -23,7 +22,6 @@ public class Pago {
         return this.valor > 0 && this.tipo != null;
     }
 
-    // Encapsulamiento en español (Obtener y Modificar)
     public double obtenerValor() {
         return valor;
     }

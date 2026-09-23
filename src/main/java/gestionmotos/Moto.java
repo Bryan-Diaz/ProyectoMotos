@@ -3,7 +3,7 @@ package gestionmotos;
 public class Moto {
     private String placa;
     private String marca;
-    private String cedula; // Cambiado a cédula
+    private String cedula;
 
     public Moto(String placa, String marca, String cedula) {
         this.placa = placa;

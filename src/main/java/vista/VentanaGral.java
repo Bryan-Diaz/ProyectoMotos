@@ -21,7 +21,7 @@ public class VentanaGral extends JFrame {
         parqueadero = new Parqueadero();
 
         setTitle("Sistema de Parqueadero - Motos");
-        setSize(550, 450); // Un poco más alta para que quepa el reporte completo
+        setSize(550, 480);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
@@ -67,7 +67,7 @@ public class VentanaGral extends JFrame {
             }
 
             if (!placa.matches("^[A-Z]{3}\\d{2}[A-Z]?$")) {
-                JOptionPane.showMessageDialog(this, "Error de registro: La placa ingresada no es una placa valida).\nEjemplos válidos: QHJ34E, QHJ12.", "Formato Inválido", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error de registro: La placa debe tener 3 letras y 2 números (la letra final es opcional).\nEjemplos válidos: QHJ34E, QHJ12.", "Formato Inválido", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -129,23 +129,31 @@ public class VentanaGral extends JFrame {
 
         JButton btnGenerar = new JButton("Generar Reporte del Día");
 
-        JLabel lblResultado = new JLabel("<html><center>Motos Ingresadas: 0<br>Motos Salidas: 0<br><br><b>Motos en Parqueadero (Placas):</b><br>Ninguna<br><br><b>Total recaudado: $0.0</b></center></html>", SwingConstants.CENTER);
+        // Pantalla
+        String htmlBase = "<html><center>Motos Ingresadas: 0<br>Motos Salidas: 0<br><br>" +
+                "<b>Ingresos por Nequi: $0.0</b><br>" +
+                "<b>Ingresos por Efectivo: $0.0</b><br><br>" +
+                "<span style='font-size:18px;'><b>Total recaudado: $0.0</b></span></center></html>";
+
+        JLabel lblResultado = new JLabel(htmlBase, SwingConstants.CENTER);
         lblResultado.setFont(new Font("Arial", Font.PLAIN, 15));
 
-        // Se agrega un scroll por si ingresan las 23 motos y la lista de placas se hace muy larga
         JScrollPane scrollPane = new JScrollPane(lblResultado);
         scrollPane.setBorder(null);
 
         btnGenerar.addActionListener(e -> {
             double total = parqueadero.generarReporteDia();
+            double totalNequi = parqueadero.obtenerTotalNequi();
+            double totalEfectivo = parqueadero.obtenerTotalEfectivo();
             int ingresadas = parqueadero.obtenerTotalMotosIngresadas();
             int salidas = parqueadero.obtenerTotalMotosSalidas();
-            String placasActivas = parqueadero.obtenerPlacasActivas();
+
 
             lblResultado.setText("<html><center>Motos Ingresadas: " + ingresadas +
                     "<br>Motos Salidas: " + salidas +
-                    "<br><br><b>Motos en Parqueadero (Placas):</b><br><span style='color:blue;'>" + placasActivas + "</span>" +
-                    "<br><br><b>Total recaudado: $" + total + "</b></center></html>");
+                    "<br><br><b>Ingresos por Nequi: $" + totalNequi + "</b>" +
+                    "<br><b>Ingresos por Efectivo: $" + totalEfectivo + "</b>" +
+                    "<br><br><span style='font-size:18px;'><b>Total recaudado: $" + total + "</b></span></center></html>");
         });
 
         panel.add(btnGenerar, BorderLayout.NORTH);

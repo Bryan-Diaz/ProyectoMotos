@@ -10,7 +10,6 @@ public class Espacio {
         this.estado = false;
     }
 
-    // Métodos del diagrama
     public void ocupar() {
         this.estado = true;
     }
@@ -19,7 +18,6 @@ public class Espacio {
         this.estado = false;
     }
 
-    // Encapsulamiento en español (Obtener y Modificar)
     public int obtenerNumero() {
         return numero;
     }

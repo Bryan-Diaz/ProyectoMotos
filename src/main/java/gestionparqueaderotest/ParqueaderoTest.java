@@ -11,7 +11,7 @@ public class ParqueaderoTest {
     @Test
     public void probarCreacionInstancias() {
         Parqueadero parqueadero = new Parqueadero();
-        Moto moto = new Moto("XYZ12A", "Suzuki", "10101010"); // Placa adaptada al nuevo formato
+        Moto moto = new Moto("XYZ12A", "Suzuki", "10101010");
 
         assertEquals(23, parqueadero.obtenerCapacidad());
         assertEquals(40.0, parqueadero.obtenerTarifa());
@@ -25,7 +25,7 @@ public class ParqueaderoTest {
     @Test
     public void probarIngresoDeMoto() {
         Parqueadero parqueadero = new Parqueadero();
-        Moto moto = new Moto("ABC98C", "Yamaha", "12345678"); // Placa adaptada al nuevo formato
+        Moto moto = new Moto("ABC98C", "Yamaha", "12345678");
 
         boolean ingresoExitoso = parqueadero.registrarIngreso(moto);
 

@@ -14,6 +14,9 @@ public class Parqueadero {
     private List<Registro> registrosActivos;
     private List<Registro> historialRegistros;
 
+    private double totalNequi;
+    private double totalEfectivo;
+
     // Constructor
     public Parqueadero() {
         this.capacidad = 23;
@@ -21,13 +24,14 @@ public class Parqueadero {
         this.espacios = new ArrayList<>();
         this.registrosActivos = new ArrayList<>();
         this.historialRegistros = new ArrayList<>();
+        this.totalNequi = 0.0;
+        this.totalEfectivo = 0.0;
 
         for (int i = 1; i <= this.capacidad; i++) {
             this.espacios.add(new Espacio(i));
         }
     }
 
-    // Métodos del diagrama
     public boolean registrarIngreso(Moto moto) {
         Espacio espacioLibre = buscarEspacioDisponible();
         if (espacioLibre == null) {
@@ -62,7 +66,13 @@ public class Parqueadero {
             registroEncontrado.modificarPago(pago);
             registroEncontrado.registrarSalida();
 
-            // Movemos al historial para el reporte
+            // Sumar al total según el tipo de pago utilizado
+            if (tipoPago == TipoPago.NEQUI) {
+                this.totalNequi += valorPagar;
+            } else if (tipoPago == TipoPago.EFECTIVO) {
+                this.totalEfectivo += valorPagar;
+            }
+
             this.historialRegistros.add(registroEncontrado);
             this.registrosActivos.remove(registroEncontrado);
             return "Salida exitosa. Total a pagar: $" + valorPagar;
@@ -72,37 +82,23 @@ public class Parqueadero {
     }
 
     public double generarReporteDia() {
-        double total = 0;
-        for (Registro r : this.historialRegistros) {
-            if (r.obtenerPago() != null) {
-                total += r.obtenerPago().obtenerValor();
-            }
-        }
-        return total;
+        return this.totalNequi + this.totalEfectivo;
     }
 
-    // MÉTODOS PARA EL REPORTE COMPLETO
+    public double obtenerTotalNequi() {
+        return this.totalNequi;
+    }
+
+    public double obtenerTotalEfectivo() {
+        return this.totalEfectivo;
+    }
+
     public int obtenerTotalMotosIngresadas() {
         return this.registrosActivos.size() + this.historialRegistros.size();
     }
 
     public int obtenerTotalMotosSalidas() {
         return this.historialRegistros.size();
-    }
-
-    // NUEVO: Obtener placas de las motos que siguen adentro
-    public String obtenerPlacasActivas() {
-        if (this.registrosActivos.isEmpty()) {
-            return "Ninguna";
-        }
-        StringBuilder placas = new StringBuilder();
-        for (int i = 0; i < this.registrosActivos.size(); i++) {
-            placas.append(this.registrosActivos.get(i).obtenerMoto().obtenerPlaca());
-            if (i < this.registrosActivos.size() - 1) {
-                placas.append(", ");
-            }
-        }
-        return placas.toString();
     }
 
     public int consultarEspacios() {
@@ -124,7 +120,6 @@ public class Parqueadero {
         return null;
     }
 
-    // Encapsulamiento
     public int obtenerCapacidad() { return capacidad; }
     public void modificarCapacidad(int capacidad) { this.capacidad = capacidad; }
     public double obtenerTarifa() { return tarifa; }
